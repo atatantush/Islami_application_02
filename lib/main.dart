@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:islami_02/Home/Hadeth/Hadeth_Details_Screen.dart';
 import 'package:islami_02/Home/Quran/Sura_Details_Screen.dart';
 import 'package:islami_02/HomeScreen.dart';
 
@@ -51,6 +52,8 @@ class MainApplication extends StatelessWidget {
       routes: {
         HomeScreen.routeName: (buildContext) => HomeScreen(),
         Sura_Details_Screen.routeName: (buildContext) => Sura_Details_Screen(),
+        Hadeth_Details_Screen.routeName: (buildContext) =>
+            Hadeth_Details_Screen(),
       },
       initialRoute: HomeScreen.routeName,
     );
