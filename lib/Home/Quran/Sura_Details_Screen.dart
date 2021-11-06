@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_02/Home/Quran/VerseWidget.dart';
+import 'package:islami_02/Providers/AppConfigProvider.dart';
+import 'package:islami_02/main.dart';
+import 'package:provider/provider.dart';
 
 class Sura_Details_Screen extends StatefulWidget {
   static const String routeName = 'Sura_Details_Screen';
@@ -16,6 +19,8 @@ class _Sura_Details_ScreenState extends State<Sura_Details_Screen> {
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)!.settings.arguments as Sura_Details_Args;
 
+    var provider = Provider.of<AppConfigProvider>(context);
+
     if (ayat.isEmpty) {
       ReadSura(args.index);
     }
@@ -25,7 +30,9 @@ class _Sura_Details_ScreenState extends State<Sura_Details_Screen> {
         Image(
             fit: BoxFit.fill,
             width: double.infinity,
-            image: AssetImage('assets/images/main_background.png')),
+            image: AssetImage(provider.isDark()
+                ? 'assets/images/main_background_dark.png'
+                : 'assets/images/main_background.png')),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -35,7 +42,9 @@ class _Sura_Details_ScreenState extends State<Sura_Details_Screen> {
               margin: EdgeInsets.only(top: 35, bottom: 15, left: 10, right: 10),
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: provider.isDark()
+                    ? MyThemeData.primaryColorDark
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(48),
               ),
               child: ayat.isEmpty
@@ -48,7 +57,9 @@ class _Sura_Details_ScreenState extends State<Sura_Details_Screen> {
                       separatorBuilder: (context, index) {
                         return Container(
                           height: 1,
-                          color: Theme.of(context).primaryColor,
+                          color: provider.isDark()
+                              ? MyThemeData.accentPrimaryColor
+                              : MyThemeData.primaryColor,
                           margin: EdgeInsets.symmetric(horizontal: 5),
                         );
                       },

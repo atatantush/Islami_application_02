@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_02/Home/Quran/Sura_Details_Screen.dart';
+import 'package:islami_02/Providers/AppConfigProvider.dart';
+import 'package:provider/provider.dart';
 
 class Sura_Name_Widget extends StatelessWidget {
   String SuraName;
@@ -10,6 +12,8 @@ class Sura_Name_Widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(
@@ -25,7 +29,7 @@ class Sura_Name_Widget extends StatelessWidget {
             SuraName,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
+              color: provider.isDark() ? Colors.white : Colors.black,
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),

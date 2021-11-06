@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_02/Home/Quran/Sura_Name_Widget.dart';
+import 'package:islami_02/Providers/AppConfigProvider.dart';
+import 'package:islami_02/main.dart';
+import 'package:provider/provider.dart';
 
 class QuranTab extends StatelessWidget {
   List<String> names = [
@@ -122,6 +125,8 @@ class QuranTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return Column(
       children: [
         Expanded(child: Image.asset('assets/images/quran_tab_logo.png')),
@@ -136,7 +141,9 @@ class QuranTab extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 24),
                   height: 1,
-                  color: Theme.of(context).primaryColor,
+                  color: provider.isDark()
+                      ? MyThemeData.accentPrimaryColor
+                      : MyThemeData.primaryColor,
                 );
               },
             )),
