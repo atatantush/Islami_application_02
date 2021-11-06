@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_02/Home/Hadeth/Hadeth_Name_Widget.dart';
+import 'package:islami_02/Providers/AppConfigProvider.dart';
+import 'package:islami_02/main.dart';
+import 'package:provider/provider.dart';
 
 class HadethTab extends StatefulWidget {
   @override
@@ -12,6 +15,8 @@ class _HadethTabState extends State<HadethTab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     ReadHadethFile();
 
     return Column(
@@ -22,18 +27,20 @@ class _HadethTabState extends State<HadethTab> {
           child: All_Hadeth_Items.isEmpty
               ? Center(child: CircularProgressIndicator())
               : ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Hadeth_Name_Widget(All_Hadeth_Items[index]);
-                  },
-                  itemCount: All_Hadeth_Items.length,
-                  separatorBuilder: (context, index) {
-                    return Container(
-                      height: 1,
-                      color: Theme.of(context).primaryColor,
+            itemBuilder: (context, index) {
+              return Hadeth_Name_Widget(All_Hadeth_Items[index]);
+            },
+            itemCount: All_Hadeth_Items.length,
+            separatorBuilder: (context, index) {
+              return Container(
+                height: 1,
+                      color: provider.isDark()
+                          ? MyThemeData.accentPrimaryColor
+                          : MyThemeData.primaryColor,
                       margin: EdgeInsets.symmetric(horizontal: 24),
                     );
-                  },
-                ),
+            },
+          ),
         ),
       ],
     );
